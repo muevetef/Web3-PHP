@@ -24,8 +24,10 @@ echo "</ul>";
 $persona = array(
     'nombre' => 'Mario',
     'apellidos' => 'Bross',
-    'trabajo' => 'Fontanero'
+    'trabajo' => 'Fontanero',
 );
+
+$persona['color'] = "verde";
 
 var_dump($persona);
 
