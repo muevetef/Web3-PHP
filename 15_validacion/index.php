@@ -31,7 +31,27 @@
 </head>
 
 <body>
-    <form action="#" method="post">
+    <?php
+
+    function filter($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
+        //var_dump($_POST);
+        $nombre = filter($_POST['nombre']);
+        $password = filter($_POST['password']);
+        $estudios = filter($_POST['estudios']);
+        $nacionalidad = filter($_POST['nacionalidad']);
+        $idiomas = filter(implode(", ", $_POST["idiomas"])); //pasar el array a string
+        $email = filter($_POST['email']);
+        $web = filter($_POST['web']);
+    }
+    ?>
+    <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <div>
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre" maxlength="50">
@@ -65,25 +85,25 @@
         <fieldset>
             <legend>Idiomas:</legend>
             <div>
-                <input type="checkbox" id="es" name="idiomas" value="español" checked />
+                <input type="checkbox" id="es" name="idiomas[]" value="español" checked />
                 <label for="es">Español</label>
             </div>
             <div>
-                <input type="checkbox" id="cat" name="idiomas" value="catalan" />
+                <input type="checkbox" id="cat" name="idiomas[]" value="catalan" />
                 <label for="cat">Catalán</label>
             </div>
             <div>
-                <input type="checkbox" id="en" name="idiomas" value="ingles" />
+                <input type="checkbox" id="en" name="idiomas[]" value="ingles" />
                 <label for="en">Inglés</label>
             </div>
             <div>
-                <input type="checkbox" id="al" name="idiomas" value="aleman" />
+                <input type="checkbox" id="al" name="idiomas[]" value="aleman" />
                 <label for="al">Aleman</label>
             </div>
         </fieldset>
         <div>
             <label for="email">Email</label>
-            <input type="email" id="email" name="email">
+            <input type="text" id="email" name="email">
         </div>
         <div>
             <label for="web">Sitio web</label>
