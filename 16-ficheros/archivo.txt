@@ -1,0 +1,24 @@
+Hola soy un archivo de texto
+que tal?
+pues bastante bién
+Hola caracola!
+<h1>Soy un h1</h1>
+
+09-05-2024 02:52:34-****Soy un texto añadido desde php****
+09-05-2024 02:52:35-****Soy un texto añadido desde php****
+09-05-2024 02:52:36-****Soy un texto añadido desde php****
+09-05-2024 02:52:37-****Soy un texto añadido desde php****
+09-05-2024 02:52:38-****Soy un texto añadido desde php****
+09-05-2024 02:52:38-****Soy un texto añadido desde php****
+09-05-2024 02:52:38-****Soy un texto añadido desde php****
+09-05-2024 02:52:39-****Soy un texto añadido desde php****
+09-05-2024 02:52:39-****Soy un texto añadido desde php****
+09-05-2024 02:52:40-****Soy un texto añadido desde php****
+09-05-2024 02:52:40-****Soy un texto añadido desde php****
+09-05-2024 02:52:41-****Soy un texto añadido desde php****
+09-05-2024 02:52:41-****Soy un texto añadido desde php****
+09-05-2024 02:52:41-****Soy un texto añadido desde php****
+09-05-2024 02:55:25-****Soy un texto añadido desde php****
+09-05-2024 02:57:01-****Soy un texto añadido desde php****
+09-05-2024 02:58:02-****Soy un texto añadido desde php****
+09-05-2024 02:58:45-****Soy un texto añadido desde php****
