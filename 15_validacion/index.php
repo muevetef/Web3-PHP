@@ -32,6 +32,7 @@
 
 <body>
     <?php
+    $errors = [];
 
     function filter($data)
     {
@@ -41,16 +42,52 @@
         return $data;
     }
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-        //var_dump($_POST);
-        $nombre = filter($_POST['nombre']);
-        $password = filter($_POST['password']);
-        $estudios = filter($_POST['estudios']);
-        $nacionalidad = filter($_POST['nacionalidad']);
-        $idiomas = filter(implode(", ", $_POST["idiomas"])); //pasar el array a string
-        $email = filter($_POST['email']);
-        $web = filter($_POST['web']);
+
+        if (empty($_POST['nombre']) || preg_match("/[0-9]/", $_POST['nombre'])) {
+            $errors[] = "El nombre no puede estar vacío y n opuede contener numeros";
+        }
+        if (empty($_POST['password']) || strlen($_POST['password']) < 4) {
+            $errors[] = "El password es obligatorio y debe tener más de 4 carácteres";
+        }
+        if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "La formato del email no es válido";
+        }
+        if (empty($_POST['web']) || !filter_var($_POST['web'], FILTER_VALIDATE_URL)) {
+            $errors[] = "La url de la web debe tener un formato válido";
+        }
+
+        // var_dump($errors);
+
+        if (empty($errors)) {
+            $nombre = filter($_POST['nombre']);
+            $password = filter($_POST['password']);
+            $estudios = filter($_POST['estudios']);
+            $nacionalidad = filter($_POST['nacionalidad']);
+            $idiomas = filter(implode(", ", $_POST["idiomas"])); //pasar el array a string
+            $email = filter($_POST['email']);
+            $web = filter($_POST['web']);
+        }
     }
     ?>
+    <ul>
+        <?php if (isset($errors)) {
+            foreach ($errors as $error) {
+                echo "<li>$error</li>";
+            }
+        }
+        ?>
+    </ul>
+    <?php if (isset($_POST['submit'])) : ?>
+        <h2>Has enviado los siguientes datos</h2>
+        <p>Nombre: <?php isset($nombre) ? print $nombre : "" ?></p>
+        <p>Password: <?php isset($password) ? print $password : "" ?></p>
+        <p>Estudios: <?php isset($estudios) ? print $estudios : "" ?></p>
+        <p>Nacionlidad: <?php isset($nacionalidad) ? print $nacionalidad : "" ?></p>
+        <p>Idiomas: <?php isset($idiomas) ? print $idiomas : "" ?></p>
+        <p>Email: <?php isset($email) ? print $email : "" ?></p>
+        <p>Web: <?php isset($web) ? print $web : "" ?></p>
+    <?php endif; ?>
+
     <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <div>
             <label for="nombre">Nombre</label>
@@ -111,6 +148,7 @@
         </div>
         <button type="submit" name="submit" value="enviar">Enviar</button>
     </form>
+
 </body>
 
 </html>
