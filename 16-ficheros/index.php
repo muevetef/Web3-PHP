@@ -1,4 +1,6 @@
 <?php
+require_once 'includes/header.php';
+
 //Abrir archivo
 $archivo = fopen("archivo.txt", "a+");
 
@@ -18,3 +20,5 @@ fclose($archivo);
 $about = fopen("about.php", "a+");
 fwrite($about, "<?php echo '<h1>Sobre mí</h1>'?>");
 fclose($about);
+
+require_once 'includes/footer.php';

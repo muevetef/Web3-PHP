@@ -52,20 +52,13 @@
         if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $errors[] = "La formato del email no es válido";
         }
-        if (empty($_POST['web']) || !filter_var($_POST['web'], FILTER_VALIDATE_URL)) {
-            $errors[] = "La url de la web debe tener un formato válido";
-        }
 
-        // var_dump($errors);
+        var_dump($errors);
 
         if (empty($errors)) {
             $nombre = filter($_POST['nombre']);
             $password = filter($_POST['password']);
-            $estudios = filter($_POST['estudios']);
-            $nacionalidad = filter($_POST['nacionalidad']);
-            $idiomas = filter(implode(", ", $_POST["idiomas"])); //pasar el array a string
             $email = filter($_POST['email']);
-            $web = filter($_POST['web']);
         }
     }
     ?>
