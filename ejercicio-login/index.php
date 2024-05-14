@@ -1,13 +1,12 @@
 <?php
-$title = "Página principal";
-require_once 'includes/header.php';
-
 session_start();
 if (!isset($_SESSION["nombre"])) {
     header("Location:login.php");
     exit;
 }
 
+$title = "Página principal";
+require_once 'includes/header.php';
 //var_dump($_SESSION);
 ?>
 <h2>Bienvenido <?= $_SESSION["nombre"] ?></h2>

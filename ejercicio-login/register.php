@@ -2,8 +2,8 @@
 $title = "Registro de usuario";
 require_once 'includes/header.php';
 require_once 'utils/filters.php';
-$errors = [];
 
+$errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     if (empty($_POST['email']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = "La formato del email no es válido";
     }
+    // var_dump($_FILES);
     //validar imagen
     if (!isset($_FILES['imagen'])) {
         $errors['imagen'] = "No has cargado ninguna imagen";
@@ -40,20 +41,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         if (!is_dir('images')) {
             mkdir('images', 0777);
         }
-        $image_path = 'images/' .
-            str_replace(" ", "-", $image_name);
+
+        $image_path = 'images/' . str_replace(" ", "-", $image_name);
+
         move_uploaded_file($image['tmp_name'], $image_path);
 
         //escribir los datos en el fichero de texto
-        $archivo = fopen("user.txt", "w");
-        fwrite($archivo, "$nombre\n$email\n$password\n$image_path\n");
+        // $archivo = fopen("user.txt", "w");
+        // fwrite($archivo, "$nombre\n$email\n$password\n$image_path\n");
+        $archivo = fopen("user2.txt", "w");
+        fwrite($archivo, "$nombre,$email,$password,$image_path\n");
         fclose($archivo);
         //redireccionar a login
         header("Location:login.php");
     }
 }
 ?>
-
 
 <h2>Formulario de Registro</h2>
 <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
@@ -72,6 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <label for="imagen">Imagen:</label>
     <input type="file" id="imagen" name="imagen" accept="image/*">
     <p><?php isset($errors['imagen']) ? print $errors['imagen'] : "" ?></p>
+
     <button type="submit" name="submit">Enviar</button>
 </form>
 <p>
